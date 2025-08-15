@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Преподаватели ИКНТ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/style/styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="/images/logo.png" alt="ИКНТ" height="40">
+                ИКНТ
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/news">Новости</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/prepods">Преподаватели</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/about">Общая информация</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contact ">Контакты</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 class="text-primary">Преподаватели</h1>
+        <div class="row" id="teachers-container"></div>
+    </div>
+
+    <footer class="bg-primary text-white text-center py-3 mt-5">
+        &copy; 2025 ИКНТ. Все права защищены.
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/scripts/prepods.js"></script>
+</body>
+
+<!-- Модальное окно для редактирования преподавателя -->
+<div class="modal fade" id="editTeacherModal" tabindex="-1" aria-labelledby="editTeacherModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Редактирование преподавателя</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editTeacherForm">
+            <input type="hidden" id="editTeacherId">
+            <div class="mb-3">
+              <label class="form-label">Имя</label>
+              <input type="text" class="form-control" id="editName" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Должность</label>
+              <input type="text" class="form-control" id="editPosition" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Биография</label>
+              <textarea class="form-control" id="editBio" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Сохранить изменения</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</html>

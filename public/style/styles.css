@@ -1,0 +1,31 @@
+.navbar-custom{
+    background-color: rgb(26, 102, 255);
+
+}
+
+body{   
+    font-family: 'PermianSansTypeface';
+}
+
+.teacher-image {
+    max-width: 150px;
+    max-height: 200px;
+    object-fit: cover; /* Сохраняет пропорции, но обрезает лишнее, если не помещается */
+}
+
+
+/* Обертка для изображения */
+.card-img-wrapper {
+    display: flex;               /* Включаем Flexbox */
+    justify-content: center;     /* Центрируем изображение по горизонтали */
+    align-items: center;         /* Центрируем изображение по вертикали */
+    height: 200px;               /* Устанавливаем фиксированную высоту для картинки */
+}
+
+/* Размеры картинки */
+.teacher-image {
+    max-width: 150px;             /* Ограничиваем картинку по ширине */
+    max-height: 200px;            /* Ограничиваем картинку по высоте */
+
+    border-radius: 5%;          /* Скругляем углы, если нужно, чтобы картинка была круглой */
+}

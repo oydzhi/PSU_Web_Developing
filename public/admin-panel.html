@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Панель администратора ИКНТ</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <div class="container py-5">
+    <h1 class="text-center mb-4">Панель администратора</h1>
+
+    <button id="logoutBtn" class="btn btn-danger mb-4">Выйти</button>
+
+    <h2>Добавить новость</h2>
+    <form id="newsForm" class="mb-5">
+      <div class="mb-3">
+        <label class="form-label">Заголовок</label>
+        <input type="text" class="form-control" id="newsTitle" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Текст новости</label>
+        <textarea class="form-control" id="newsContent" rows="3" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Добавить новость</button>
+    </form>
+
+    <h2>Добавить преподавателя</h2>
+    <form id="teacherForm">
+      <div class="mb-3">
+        <label class="form-label">Имя</label>
+        <input type="text" class="form-control" id="teacherName" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Должность</label>
+        <input type="text" class="form-control" id="teacherPosition" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Описание</label>
+        <textarea class="form-control" id="teacherBio" rows="3" required></textarea>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Фото (ссылка)</label>
+        <input type="text" class="form-control" id="teacherPhoto" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Добавить преподавателя</button>
+    </form>
+  </div>
+
+  <script>
+    // Проверка авторизации
+    fetch('/api/admin/check')
+      .then(res => res.json())
+      .then(data => {
+        if (!data.isAdmin) {
+          alert('Нет доступа');
+          window.location.href = '/login.html';
+        }
+      });
+
+    // Выход из админки
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
+      await fetch('/api/admin/logout', { method: 'POST' });
+      window.location.href = '/login.html';
+    });
+
+    // Добавление новости
+    document.getElementById('newsForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const title = document.getElementById('newsTitle').value;
+      const content = document.getElementById('newsContent').value;
+
+      const res = await fetch('/api/news', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, content })
+      });
+
+      if (res.ok) {
+        alert('Новость добавлена');
+        e.target.reset();
+      } else {
+        alert('Ошибка добавления новости');
+      }
+    });
+
+    // Добавление преподавателя
+    document.getElementById('teacherForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('teacherName').value;
+      const position = document.getElementById('teacherPosition').value;
+      const bio = document.getElementById('teacherBio').value;
+      const photo = document.getElementById('teacherPhoto').value;
+
+      const res = await fetch('/api/prepods', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, position, bio, photo })
+      });
+
+      if (res.ok) {
+        alert('Преподаватель добавлен');
+        e.target.reset();
+      } else {
+        alert('Ошибка добавления преподавателя');
+      }
+    });
+  </script>
+
+</body>
+</html>
